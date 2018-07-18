@@ -1,0 +1,18 @@
+---
+
+- hosts: dom0
+
+  roles:
+    - alpine-base
+    - dom0
+
+  post_tasks:
+    - include_tasks: ansible-roles/alpine-base/tasks/commit.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tags: k8s
+
+  roles:
+    - k8s-base
