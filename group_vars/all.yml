@@ -1,0 +1,4 @@
+k8s_stable_charts: https://kubernetes-charts.storage.googleapis.com/
+
+k8s_tiller_namespace: "kube-system"
+k8s_tiller_name: "tiller-deploy"

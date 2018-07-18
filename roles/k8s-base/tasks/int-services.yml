@@ -1,0 +1,38 @@
+---
+
+- name: Create the namespace
+  k8s:
+    name: "{{ k8s_int_services_namespace }}"
+    kind: Namespace
+    state: present
+
+- name: Deploy cert-manager
+  helm:
+    chart:
+      name: "{{ k8s_int_services_certmanager_chart }}"
+      version: "{{ k8s_int_services_certmanager_version }}"
+      source:
+        type: repo
+        location: "{{ k8s_int_services_certmanager_repo }}"
+    namespace: "{{ k8s_int_services_namespace }}"
+    name: "{{ k8s_int_services_certmanager_name }}"
+    state: present
+    values: "{{ k8s_int_services_certmanager_values }}"
+    host: "{{ k8s_tiller_host }}"
+  when: k8s_int_services_certmanager == true
+
+- name: Deploy nginx ingress
+  helm:
+    chart:
+      name: "{{ k8s_int_services_nginx_chart }}"
+      version: "{{ k8s_int_services_nginx_version }}"
+      source:
+        type: repo
+        location: "{{ k8s_int_services_nginx_repo }}"
+    namespace: "{{ k8s_int_services_namespace }}"
+    name: "{{ k8s_int_services_nginx_name }}"
+    state: present
+    values: "{{ k8s_int_services_nginx_values }}"
+    host: "{{ k8s_tiller_host }}"
+  when: k8s_int_services_nginx == true
+

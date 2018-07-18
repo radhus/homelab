@@ -1,0 +1,27 @@
+---
+
+- name: Apply Tiller ServiceAccount
+  k8s:
+    namespace: "{{ k8s_tiller_namespace }}"
+    state: present
+    src: tiller-serviceaccount.yaml
+
+- name: Apply Tiller ClusterRoleBinding
+  k8s:
+    namespace: "{{ k8s_tiller_namespace }}"
+    state: present
+    src: tiller-clusterrolebinding.yaml
+
+# TODO: helm init
+
+# TODO: error handling if it doesn't exist
+- name: Get Tiller endpoint
+  k8s:
+    kind: Service
+    name: "{{ k8s_tiller_name }}"
+    namespace: "{{ k8s_tiller_namespace }}"
+  register: k8s_tiller_service
+
+- name: Save Tiller endpoint
+  set_fact:
+    k8s_tiller_host: "{{ k8s_tiller_service.result.spec.clusterIP }}"

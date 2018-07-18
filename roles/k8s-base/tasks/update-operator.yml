@@ -1,0 +1,31 @@
+---
+
+- name: Create the namespace
+  k8s:
+    name: "{{ k8s_update_operator_namespace }}"
+    kind: Namespace
+    state: present
+
+- name: Apply ClusterRole
+  k8s:
+    namespace: "{{ k8s_update_operator_namespace }}"
+    state: present
+    src: update-operator-clusterrole.yml
+
+- name: Apply ClusterRoleBinding
+  k8s:
+    namespace: "{{ k8s_update_operator_namespace }}"
+    state: present
+    src: update-operator-clusterrolebinding.yml
+
+- name: Apply Agent
+  k8s:
+    namespace: "{{ k8s_update_operator_namespace }}"
+    state: present
+    src: update-operator-agent.yml
+
+- name: Apply Operator
+  k8s:
+    namespace: "{{ k8s_update_operator_namespace }}"
+    state: present
+    src: update-operator.yml

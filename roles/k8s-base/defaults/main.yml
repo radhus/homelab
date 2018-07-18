@@ -1,0 +1,17 @@
+k8s_update_operator_namespace: "reboot-coordinator"
+
+k8s_int_services_namespace: "int-services"
+
+k8s_int_services_certmanager: yes
+k8s_int_services_certmanager_name: cert-manager
+k8s_int_services_certmanager_chart: cert-manager
+k8s_int_services_certmanager_version: v0.3.4
+k8s_int_services_certmanager_repo: "{{ k8s_stable_charts }}"
+k8s_int_services_certmanager_values: "{{ lookup('file','cert-manager.yml') | from_yaml }}"
+
+k8s_int_services_nginx: yes
+k8s_int_services_nginx_name: nginx
+k8s_int_services_nginx_chart: nginx-ingress
+k8s_int_services_nginx_version: "0.22.1"
+k8s_int_services_nginx_repo: "{{ k8s_stable_charts }}"
+k8s_int_services_nginx_values: "{{ lookup('file','nginx.yml') | from_yaml }}"

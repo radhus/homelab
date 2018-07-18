@@ -1,0 +1,10 @@
+---
+
+- name: Deploy helm
+  include: helm.yml
+
+- name: Deploy the CoreOS update operator
+  include: update-operator.yml
+
+- name: Deploy the int_services namespace
+  include: int-services.yml

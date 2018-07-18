@@ -1,0 +1,28 @@
+controller:
+  config:
+    ssl-redirect: "true"
+  service:
+    type: ClusterIP
+  stats:
+    enabled: true
+    service:
+      type: ClusterIP
+
+defaultBackend:
+  enabled: true
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+
+# TCP service key:value pairs
+# Ref: https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/tcp
+##
+tcp: {}
+
+# UDP service key:value pairs
+# Ref: https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/udp
+##
+udp: {}
