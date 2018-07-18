@@ -1,0 +1,7 @@
+---
+
+- name: Commit changes
+  shell: lbu commit
+
+- name: Sync apk cache
+  shell: apk cache sync

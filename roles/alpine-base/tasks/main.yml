@@ -1,0 +1,8 @@
+---
+
+- name: Install Ansible requirements
+  shell: apk add --no-cache python
+
+- name: Update APK cache
+  apk:
+    update_cache: true

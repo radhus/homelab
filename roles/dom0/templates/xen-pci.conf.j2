@@ -1,0 +1,4 @@
+# /etc/conf.d/xen-pci
+
+{% set space = joiner(" ") %}
+DEVICES="{% for pci in domu_pcis %}{{ space() }}{{ pci }}{% endfor %}"
